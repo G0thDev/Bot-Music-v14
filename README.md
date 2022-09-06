@@ -5,7 +5,8 @@
 # Requirements
 - FFmpeg
 - Node v16
-- Token <a href="https://google.com">TOken</a>
+- Token <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com?project=mimi-3b57d">YouTube Api</a>
+- Token <a href="https://discord.com/developers/applications">Discord</a>
 
 ## package.json
 
