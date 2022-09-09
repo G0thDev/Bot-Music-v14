@@ -119,7 +119,7 @@ async function handleVideo(video, msg, voiceChannel, playlist = false) {
 	
 async function play(guild, song) {
 	const serverQueue = queue.get(guild.id);
-	
+	let stop = false;
 	if (!song) {
 		disconnectToChannel(serverQueue.voiceChannel);
 		queue.delete(guild.id);
@@ -135,13 +135,14 @@ async function play(guild, song) {
 	player.play(resource);
 	entersState(player, AudioPlayerStatus.Playing);
 	player.on(AudioPlayerStatus.Idle,async () => {
+		if(!stop){
 		if(!serverQueue.loop) serverQueue.songs.shift();
 		play(guild, serverQueue.songs[0]);
+		stop = true;
+		}
 	});
-		
-	if(serverQueue.connection === null){
-		serverQueue.connection = resource.audioPlayer;
-	}
+	serverQueue.connection = resource.audioPlayer;
+	
 		
 }
 
